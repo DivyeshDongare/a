@@ -1,0 +1,114 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int orderID;
+    Node* next;
+};
+
+class PizzaParlor {
+private:
+    Node* front;
+    Node* rear;
+    int size;
+    int capacity;
+
+public:
+    PizzaParlor(int capacity) {
+        this->capacity = capacity;
+        front = nullptr;
+        rear = nullptr;
+        size = 0;
+    }
+
+    
+    void placeOrder(int orderID) {
+        if (size == capacity) {
+            cout << "Queue is full. Cannot place more orders." << endl;
+            return;
+        }
+
+        Node* newNode = new Node();
+        newNode->orderID = orderID;
+
+        if (front == nullptr) {
+            front = newNode;
+            rear = newNode;
+            newNode->next = front;
+        } else {
+            rear->next = newNode;
+            rear = newNode;
+            rear->next = front; 
+        }
+
+        size++;
+        cout << "Order " << orderID << " placed." << endl;
+    }
+
+    void serveOrder() {
+        if (front == nullptr) {
+            cout << "Queue is empty. No orders to serve." << endl;
+            return;
+        }
+
+        Node* temp = front;
+
+        if (front == rear) {
+            front = nullptr;
+            rear = nullptr;
+        } else {
+            front = front->next;
+            rear->next = front;
+        }
+
+        cout << "Serving order " << temp->orderID << endl;
+        delete temp;
+        size--;
+    }
+
+    void displayOrders() {
+        if (front == nullptr) {
+            cout << "Queue is empty." << endl;
+            return;
+        }
+
+        Node* temp = front;
+        cout << "Orders in queue: ";
+        do {
+            cout << temp->orderID << " ";
+            temp = temp->next;
+        } while (temp != front);
+        cout << endl;
+    }
+
+   
+    ~PizzaParlor() {
+        while (size > 0) {
+            serveOrder();
+        }
+    }
+};
+
+int main() {
+    int capacity = 5; 
+    PizzaParlor parlor(capacity);
+
+    parlor.placeOrder(101);
+    parlor.placeOrder(102);
+    parlor.placeOrder(103);
+    parlor.placeOrder(104);
+    parlor.placeOrder(105);
+
+    parlor.displayOrders();
+
+    parlor.serveOrder();
+    parlor.serveOrder();
+
+    parlor.displayOrders();
+
+    parlor.placeOrder(106);
+    parlor.displayOrders();
+
+    return 0;
+}
+
