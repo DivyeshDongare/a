@@ -1,0 +1,60 @@
+S=[] 
+n=int(input("enter the total number of present student of 1st year:") )                                                                                                                                                                                   
+for i in range (n): 
+    s=float(input("enter the percentage of present student:" )) 
+    S.append(s) 
+print(S) 
+     
+def bubblesort(): 
+    count=0 
+    for i in range(0,n-1): 
+     for j in range(0,n-1): 
+         count=count+1 
+         if S[j]>S[j+1]: 
+             r=S[j+1] 
+             S[j+1]=S[j] 
+             S[j]=r 
+             
+    print("Result of bubble sort=",S) 
+bubblesort()    
+     
+def selectionsort(): 
+    count=0 
+    for i in range(0,n-1): 
+        min=S[i] 
+        min_index=i 
+        for j in range(i+1,n-1): 
+            if min>S[j]: 
+                min=S[j] 
+                min_index=j 
+            count=count+1 
+            S[i],min=min,S[i] 
+print("Result in selection sort=",S) 
+
+T=[]   
+for i in range (n-1,n-6,-1): 
+    s=S[i] 
+    T.append(s) 
+print("Top 5 students=",T) 
+
+
+# # Selection sort in Python
+# # time complexity O(n*n)
+# #sorting by finding min_index
+# def selectionSort(array, size):
+	
+# 	for ind in range(size):
+# 		min_index = ind
+
+# 		for j in range(ind + 1, size):
+# 			# select the minimum element in every iteration
+# 			if array[j] < array[min_index]:
+# 				min_index = j
+# 		# swapping the elements to sort the array
+# 		(array[ind], array[min_index]) = (array[min_index], array[ind])
+
+# arr = [-2, 45, 0, 11, -9,88,-97,-202,747]
+# size = len(arr)
+# selectionSort(arr, size)
+# # print('The array after sorting in Ascending Order by selection sort is:')
+# # print(arr)
