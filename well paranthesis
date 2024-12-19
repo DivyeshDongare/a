@@ -1,0 +1,99 @@
+#include <iostream>
+using namespace std;
+
+#define SIZE 10
+
+class Stack {
+    int top;
+    char stk[SIZE];
+public:
+    Stack() { top = -1; }
+    void push(char);
+    char pop();
+    int isFull();
+    int isEmpty();
+};
+
+void Stack::push(char x) {
+    if (isFull()) {
+        cout << "\nStack overflow! Cannot push '" << x << "'\n";
+        return;
+    }
+    stk[++top] = x;
+}
+
+char Stack::pop() {
+    if (isEmpty()) {
+        cout << "\nStack underflow! Cannot pop.\n";
+        return '\0'; 
+    }
+    return stk[top--];
+}
+
+int Stack::isFull() {
+    return top == SIZE - 1;
+}
+
+int Stack::isEmpty() {
+    return top == -1;
+}
+
+int main() {
+    Stack s1;
+    char exp[20], ch;
+    int i = 0;
+
+    cout << "\nEnter the expression to check whether it is well-formed or not: ";
+    cin >> exp;
+
+    if ((exp[0] == ')') || (exp[0] == ']') || (exp[0] == '}')) {
+        cout << "\nInvalid Expression.....\n";
+        return 0;
+    }
+
+    while (exp[i] != '\0') {
+        ch = exp[i];
+        switch (ch) {
+            case '(': 
+            case '[': 
+            case '{': 
+                s1.push(ch); 
+                break;
+
+            case ')':
+                if (s1.isEmpty() || s1.pop() != '(') {
+                    cout << "\nSorry !!! Invalid Expression or not well parenthesized....\n";
+                    return 0;
+                }
+                break;
+
+            case ']':
+                if (s1.isEmpty() || s1.pop() != '[') {
+                    cout << "\nSorry !!! Invalid Expression or not well parenthesized....\n";
+                    return 0;
+                }
+                break;
+
+            case '}':
+                if (s1.isEmpty() || s1.pop() != '{') {
+                    cout << "\nSorry !!! Invalid Expression or not well parenthesized....\n";
+                    return 0;
+                }
+                break;
+
+            default:
+                
+                break;
+        }
+        i++;
+    }
+
+    
+    if (s1.isEmpty()) {
+        cout << "\nExpression is well parenthesized...\n";
+    } else {
+        cout << "\nSorry !!! Invalid Expression or not well parenthesized....\n";
+    }
+
+return 0;
+}
