@@ -1,0 +1,122 @@
+A=[] 
+a=int(input("enter total no.of present student:")) 
+for i in range (a): 
+    b=int(input("enter the roll no. of present student")) 
+    A.append(b) 
+print(A) 
+ 
+def linearsearch(): 
+    flag=0 
+    for i in range(a): 
+       if (A[i]==key): 
+        flag=1 
+        break; 
+    if (flag==1): 
+        print("student is present") 
+    else: 
+        print("student is absent") 
+ 
+ 
+ 
+def sentinalsearch(): 
+    i=0 
+    A.append(key) 
+    while(A[i]!=key): 
+     i+=1 
+    if a>i: 
+        print("student is present") 
+    else: 
+        print("student is absent") 
+ 
+ 
+ 
+def binarysearch(): 
+  low=0; 
+  high=a-1; 
+  flag=0; 
+  while(low<=high): 
+      mid=(low+high)//2 
+      if(A[mid]==key): 
+          flag=1; 
+          break; 
+      elif(A[mid]>key): 
+          high=mid-1 
+      else: 
+          low=mid+1 
+           
+  if(flag==1): 
+      print("student is present") 
+  else: 
+      print("student is absent") 
+      
+    
+         
+def fibonaccisearch(): 
+    f=1; 
+    f1=1; 
+    f2=0; 
+    while f<a: 
+        f2=f1; 
+        f1=f; 
+        f=f1+f2; 
+    i=0; 
+    offset=-1; 
+    flag=0; 
+    while f>=1: 
+        i=min(offset+f2,a-1); 
+        if(A[i]==key): 
+            flag=1; 
+            break; 
+        elif A[i]>key: 
+            f=f2; 
+            f1=f1-f2; 
+            f2=f-f1; 
+        else: 
+            f=f1 
+            f1=f2 
+            f2=f-f1 
+            offset=i 
+             
+    if(flag==1 and A[offset+1==key]): 
+        print("student is present") 
+    else: 
+        print("student is absent") 
+       
+while(1): 
+     
+     print("1.linear search \n 2.sentinal search \n 3.binary search \n 4. fibonacci search \n 5.Exit") 
+     choice=int(input("enter your choice")) 
+     if choice==1: 
+      while(1): 
+           key=int(input("enter the key")) 
+           linearsearch() 
+           x=int(input("do you want to continue(1/0):")) 
+           if x!=1: 
+            break; 
+         
+     if choice==2: 
+        while(1): 
+         key=int(input("enter the key")) 
+         sentinalsearch() 
+         x=int(input("do you want to continue(1/0):")) 
+         if x!=1: 
+          break; 
+ 
+     if choice==3: 
+       while(1): 
+        key=int(input("enter the key")) 
+        binarysearch() 
+        x=int(input("do you want to continue(1/0):")) 
+        if x!=1: 
+         break;                 
+         
+     if choice==4: 
+       while(1): 
+        key=int(input("enter the key")) 
+        fibonaccisearch() 
+        x=int(input("do you want to continue(1/0):")) 
+        if x!=1: 
+         break;         
+     
+     if choice==5: 
+      break;    
