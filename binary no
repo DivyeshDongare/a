@@ -1,0 +1,103 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+// Node structure for the linked list
+struct Node {
+    int data;  // To store binary digits (0 or 1)
+    Node* next;  // Pointer to the next node
+};
+
+// Function to create a new node
+Node* newNode(int data) {
+    Node* node = new Node();
+    node->data = data;
+    node->next = nullptr;
+    return node;
+}
+
+// Function to print the linked list
+void printList(Node* head) {
+    Node* temp = head;
+    while (temp != nullptr) {
+        cout << temp->data;
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+// Function to compute the one's complement of the binary number in the linked list
+Node* onesComplement(Node* head) {
+    Node* temp = head;
+    while (temp != nullptr) {
+        // Flip the bits (1 becomes 0 and 0 becomes 1)
+        temp->data = (temp->data == 0) ? 1 : 0;
+        temp = temp->next;
+    }
+    return head;
+}
+
+// Function to add 1 to the linked list representing binary number (for two's complement)
+Node* addOne(Node* head) {
+    Node* temp = head;
+    stack<Node*> s;
+    
+    // Traverse the list and push the digits to a stack
+    while (temp != nullptr) {
+        s.push(temp);
+        temp = temp->next;
+    }
+
+    // Add 1 to the least significant bit (which is at the top of the stack)
+    bool carry = true;
+    while (!s.empty() && carry) {
+        Node* node = s.top();
+        s.pop();
+        
+        if (node->data == 0) {
+            node->data = 1;
+            carry = false;
+        } else {
+            node->data = 0; // Carry forward if 1 is encountered
+        }
+    }
+
+    // If there's still a carry left (e.g., all bits were 1), add a new node
+    if (carry) {
+        Node* new_head = newNode(1);
+        new_head->next = head;
+        return new_head;
+    }
+
+    return head;
+}
+
+// Function to compute the two's complement (one's complement + 1)
+Node* twosComplement(Node* head) {
+    // First, get the one's complement
+    head = onesComplement(head);
+    // Then add 1 to the one's complement
+    return addOne(head);
+}
+
+int main() {
+    // Example: Binary number 101 (which is 5 in decimal)
+    Node* head = newNode(1);
+    head->next = newNode(0);
+    head->next->next = newNode(1);
+
+    cout << "Original Binary Number: ";
+    printList(head);
+
+    // Get One's Complement
+    Node* onesComp = onesComplement(head);
+    cout << "One's Complement: ";
+    printList(onesComp);
+
+    // Get Two's Complement
+    Node* twosComp = twosComplement(onesComp);
+    cout << "Two's Complement: ";
+    printList(twosComp);
+
+    return 0;
+}
