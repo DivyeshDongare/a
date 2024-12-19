@@ -1,0 +1,353 @@
+#include<iostream>
+using namespace std;
+#define m 100
+int f=-1,r=-1,n;
+int q[m];
+int isempty()
+{
+	if(f==-1 && r==-1)
+	{return 1;
+	}
+	else
+	{return 0;
+	}
+}
+int isfull()
+{
+	if(f==0 && r==m-1)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+void enqueue_r()
+{
+	if(isfull())
+	{
+		cout<<"\njob is full";
+	}
+	else
+	{   if(r==m-1)
+	     {
+	     	cout<<"\ntry insertion from front end";
+		 }
+	
+	
+	   else{
+	      if(f==-1)
+	      {
+	      	f=0;
+	      	
+		  }
+		  
+	     int i,e;
+	
+			r++;
+			cout<<"\n Enter job";
+			cin>>e;
+			q[r]=e;
+		
+	}
+	}
+}
+
+void dequeue_f()
+{
+	if(isempty())
+	{
+		cout<<"\n job is empty";
+	}
+	else
+	{    cout<<"\n delete job in queue="<<q[f];
+	      f++;
+		
+		  
+} }
+void enqueue_f()
+{
+	if(isfull())
+	{
+		cout<<"\n q is full";
+	}
+	else
+	{   int e;
+		if(f>r)
+		{
+		   f--;
+		   q[f]=e;	   	
+		}
+		else
+		{
+		  if (f==0)
+		  {
+		  	cout<<"\n try insertion from other end";
+			  }
+		  else
+		  {
+		  	f=0;
+		  	cout<<"|n enter job";
+		  	cin>>e;
+		  	q[f]=e;
+		 }	
+		}
+	}
+}
+void dequeue_r()
+{
+	if(isempty())
+	{
+		cout<<"\n q is empty";
+	}
+	else
+	{
+		cout<<q[r]<<"]n deleted";
+		if(f==r){
+			f=-1;
+			r=-1;
+		}
+		else
+		{
+			--r;
+		}
+	}
+};
+void display()
+{
+	if(isempty())
+	{
+	 	cout<<"\n job is empty"; 	
+	}
+	else
+	{ int i;
+		for(i=f;i<=r;i++)
+		{    
+			cout<<"\n job in queue=";
+			cout<<q[i];
+		}
+	}
+}
+
+int main()
+{
+  int ch;
+ 	char s;
+ 	do{
+ 		cout<<"\n1.enqueue_r\n2.dequeue_f \n3.display \n4dequeue_r\n5enqueue_f";
+ 		cout<<"\nenter your choice";
+ 		cin>>ch;
+ 	switch(ch)	{
+ 		         
+ 		         case 1: enqueue_r();
+ 		                 break;
+ 		         case 2: dequeue_f();
+ 		               break;
+ 		        case 3:display();
+ 		          break;
+ 		        case 4: dequeue_r();
+ 		           break;
+ 		        case 5: enqueue_f();
+ 		           break;
+ 		        default:cout<<"\n invalid choice";
+ 		        
+		 }cout<<"\n do you want to continue y/n	";
+		 cin>>s; 
+		 }while(s=='y');
+ return 0;
+
+}
+
+
+
+// #include <iostream>
+//  using namespace std;
+//  #define max 10
+//  class Dque
+//  {
+//      int front, rear;
+//      int q[max];
+
+//  public:
+//      Dque()
+//      {
+//          front = rear = -1;
+//      }
+//      void insert_front();
+//      void insert_rear();
+//      void delete_front();
+//      void delete_rear();
+//      void display();
+//      int isemp();
+//      int isfull();
+//  };
+
+//  int Dque::isemp()
+//  {
+//      if (front == -1)
+//      {
+//          return 1;
+//      }
+//      else
+//      {
+//          return 0;
+//      }
+//  }
+//  int Dque::isfull()
+
+//  {
+//      if (rear == max - 1)
+//      {
+//          return 1;
+//      }
+//      else
+//      {
+//          return 0;
+//      }
+//  }
+//  void Dque::insert_rear()
+//  {
+//      if (isfull())
+//      {
+//          cout << "Queue is full" << endl;
+//      }
+//      if (front == -1)
+//      {
+//          front = 0;
+//      }
+//      rear++;
+//      cout << "Enter element to insert at back :  ";
+//      cin >> q[rear];
+//  }
+//  void Dque::delete_front()
+//  {
+//      if (isemp())
+//      {
+//          cout << "Queue is empty" << endl;
+//      }
+//      else
+//      {
+//          cout << "Deleted element is " << q[front] << endl;
+//          front++;
+//      }
+//  }
+
+//  void Dque::insert_front()
+//  {
+//       if (isfull())
+//       {
+//           cout << "Queue is full" << endl;
+//       }
+//       else if (front == 0)
+//       {
+
+//           for (int i = rear; i >= front; i--)
+//           {
+//               q[i + 1] = q[i];
+//           }
+
+//       }
+//        else
+//       {
+//           front--;
+//       }
+//         cout << "Enter element to insert at front : ";
+//           cin >> q[front];
+//           rear++;
+
+//      if (isfull())
+//      {
+//          cout << "Queue is Full" << endl;
+     
+//      }
+//      if (front == -1)
+//      { 
+//          front = rear = 0;
+//      }
+//      else if (front == 0)
+//      { 
+//          cout << "No space at the front!" << endl;
+//          return;
+//      }
+//      else
+//      {
+//          front--;
+//      }
+//      cout << "Enter element to insert at front: ";
+//      cin >> q[front];
+//  }
+
+//  void Dque::delete_rear()
+//  {
+//      if (isemp())
+//      {
+//          cout << "Queue is empty" << endl;
+//      }
+//      else
+//      {
+//          cout << "Deleted element is " << q[rear] << endl;
+//          rear--;
+//      }
+//  }
+//  void Dque::display()
+//  {
+//      cout << "Dqueue is --> ";
+//      for (int i = front; i <= rear; i++)
+//      {
+//          cout << q[i] << " ";
+//      }
+//      cout << endl;
+//  }
+//  int main()
+//  {
+//      Dque c;
+//      int ch;
+//      char r;
+
+//      do
+//      {
+//          cout << "\n1.Insert at front  \n2.Insert at back \n3.Delete from front \n4.Delete from Rear \n5.Display";
+
+//          cout << "\nEnter your choice: ";
+//          cin >> ch;
+
+//          switch (ch)
+//          {
+//          case 1:
+//              c.insert_front();
+//              break;
+
+//          case 2:
+//              c.insert_rear();
+//              break;
+
+//          case 3:
+//              c.delete_front();
+//              break;
+
+//          case 4:
+//              c.delete_rear();
+//              break;
+
+//          case 5:
+//              c.display();
+//              break;
+
+//          default:
+//              cout << "Invalid choice ! " << endl;
+//          }
+
+//          cout << "Do you want to continue ? (y/n): ";
+//          cin >> r;
+
+//      } while (r == 'y');
+
+//      return 0;
+//  }
+
+
+
+
+
+
